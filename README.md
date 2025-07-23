@@ -16,3 +16,4 @@ cd frontend
 npm install
 npm run dev
 ```
+# smart-budget-cooking-assistant
