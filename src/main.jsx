@@ -14,3 +14,7 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </React.StrictMode>
 )
+
+// TEMP: sanity logs (remove later)
+console.log('[boot] starting app');
+console.log('[env] api?', !!import.meta.env.VITE_FIREBASE_API_KEY, 'mode:', import.meta.env.MODE);
