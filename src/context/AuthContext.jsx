@@ -24,7 +24,15 @@ export function AuthProvider({ children }) {
     logout: () => signOut(auth),
   }
 
-  return <Ctx.Provider value={value}>{!loading && children}</Ctx.Provider>
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-neutral-600">
+        <div className="animate-pulse">Loading…</div>
+      </div>
+    )
+  }
+
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }
 
 export function useAuth() {
