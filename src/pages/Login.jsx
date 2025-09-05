@@ -3,6 +3,12 @@ import { useAuth } from '../context/AuthContext'
 import { Card, CardBody, CardHeader } from '../components/ui/Card'
 import { Input, Label } from '../components/ui/Input'
 import Button from '../components/ui/Button'
+import { useNavigate } from "react-router-dom";
+
+
+const navigate = useNavigate();
+await login(email, password);
+navigate("/", { replace: true });
 
 export default function Login() {
   const { login } = useAuth()

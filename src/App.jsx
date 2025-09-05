@@ -6,6 +6,28 @@ import RecipeList from './components/RecipeList'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import { useAuth } from './context/AuthContext'
+import GuestRoute from "./context/GuestRoute";
+
+
+<Routes>
+  <Route
+    path="/"
+    element={
+      currentUser ? (
+        <div className="space-y-6 pb-10">
+          <RecipeForm />
+          <RecipeList />
+        </div>
+      ) : (
+        <div className="max-w-2xl py-12 text-neutral-700 dark:text-neutral-300">
+          <p className="text-lg">Sign in to add recipes and see your personalized list.</p>
+        </div>
+      )
+    }
+  />
+  <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
+  <Route path="/signup" element={<GuestRoute><Signup /></GuestRoute>} />
+</Routes>
 
 function Hero() {
   return (
