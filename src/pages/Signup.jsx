@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { Card, CardBody, CardHeader } from '../components/ui/Card'
 import { Input, Label } from '../components/ui/Input'
@@ -9,10 +10,24 @@ export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   const onSubmit = async (e) => {
-    e.preventDefault(); setLoading(true)
-    try { await signup(email, password) } finally { setLoading(false) }
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+    try {
+      await signup(email, password)
+      navigate('/')              // ✅ go to home after success
+    } catch (err) {
+      console.error(err)
+      // Show a friendly message
+      const msg = err?.message || 'Sign up failed. Check your email/password and try again.'
+      setError(msg)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -29,7 +44,10 @@ export default function Signup() {
               <Label htmlFor="pw">Password</Label>
               <Input id="pw" type="password" value={password} onChange={e=>setPassword(e.target.value)} />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>{loading? 'Creating…':'Create account'}</Button>
+            {error && <p className="text-sm text-red-600">{error}</p>}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? 'Creating…' : 'Create account'}
+            </Button>
           </form>
         </CardBody>
       </Card>
