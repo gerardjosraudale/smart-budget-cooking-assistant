@@ -2,7 +2,7 @@
   "name": "smart-budget-cooking-assistant",
   "version": "1.0.0",
   "private": true,
-  "description": "Smart Budget Cooking Assistant \u2014 React + Vite + Firebase",
+  "description": "Smart Budget Cooking Assistant — React + Vite + Firebase",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,22 +10,22 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "firebase": "^10.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.2",
-    "clsx": "^2.1.1",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.20",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10",
-    "vite": "^5.4.0",
-    "eslint": "^9.9.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.7"
+    "vite": "^7.1.4"
   },
   "engines": {
     "node": ">=18"
