@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import Button from '../ui/Button'
 import { useAuth } from '../../context/AuthContext'
+import { Link } from "react-router-dom";
 
+<Link to="/profile"><Button variant="ghost">Profile</Button></Link>
 export default function Navbar() {
   const { currentUser, logout } = useAuth()
   return (

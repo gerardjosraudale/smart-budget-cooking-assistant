@@ -1,4 +1,3 @@
-// src/App.jsx
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Container from "./components/layout/Container";
@@ -6,15 +5,15 @@ import RecipeForm from "./components/RecipeForm";
 import RecipeList from "./components/RecipeList";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";          // ✅ new
+import BudgetSummary from "./components/BudgetSummary";  // ✅ new
 import { useAuth } from "./context/AuthContext";
 import GuestRoute from "./context/GuestRoute";
 
 function Hero() {
   return (
     <div className="pt-8 pb-6">
-      <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-        Smart Budget Cooking
-      </h1>
+      <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">Smart Budget Cooking</h1>
       <p className="mt-3 text-lg text-neutral-700 dark:text-neutral-300 max-w-2xl">
         Plan meals, control costs, and cook simply. Built with Firebase + Vite.
       </p>
@@ -23,18 +22,14 @@ function Hero() {
 }
 
 export default function App() {
-  // ✅ currentUser is defined INSIDE the component
   const { currentUser } = useAuth();
 
   return (
     <div className="min-h-full">
       <Navbar />
-
       <Container>
         <Hero />
-
         <Routes>
-          {/* Home */}
           <Route
             path="/"
             element={
@@ -42,34 +37,18 @@ export default function App() {
                 <div className="space-y-6 pb-10">
                   <RecipeForm />
                   <RecipeList />
+                  <BudgetSummary />   {/* ✅ show summary */}
                 </div>
               ) : (
                 <div className="max-w-2xl py-12 text-neutral-700 dark:text-neutral-300">
-                  <p className="text-lg">
-                    Sign in to add recipes and see your personalized list.
-                  </p>
+                  <p className="text-lg">Sign in to add recipes and see your personalized list.</p>
                 </div>
               )
             }
           />
-
-          {/* Auth pages are guest-only: redirect to / if already signed in */}
-          <Route
-            path="/login"
-            element={
-              <GuestRoute>
-                <Login />
-              </GuestRoute>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <GuestRoute>
-                <Signup />
-              </GuestRoute>
-            }
-          />
+          <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
+          <Route path="/signup" element={<GuestRoute><Signup /></GuestRoute>} />
+          <Route path="/profile" element={currentUser ? <Profile /> : <GuestRoute><Login /></GuestRoute>} /> {/* ✅ */}
         </Routes>
       </Container>
     </div>

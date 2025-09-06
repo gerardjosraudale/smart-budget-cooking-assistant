@@ -1,0 +1,69 @@
+import { useEffect, useState } from "react";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "../utils/firebase";
+import { useAuth } from "../context/AuthContext";
+import { Card, CardBody, CardHeader } from "./ui/Card";
+
+export default function BudgetSummary() {
+  const { currentUser } = useAuth();
+  const [plannedTotal, setPlannedTotal] = useState(0);
+  const [weeklyBudget, setWeeklyBudget] = useState(null);
+
+  useEffect(() => {
+    // listen to planned recipes for this user
+    const q = query(
+      collection(db, "recipes"),
+      where("uid", "==", currentUser.uid),
+      where("planned", "==", true)
+    );
+    const unsub = onSnapshot(q, (snap) => {
+      const total = snap.docs.reduce((sum, d) => {
+        const val = d.data().cost;
+        return sum + (typeof val === "number" ? val : 0);
+      }, 0);
+      setPlannedTotal(total);
+    });
+    return () => unsub();
+  }, [currentUser]);
+
+  useEffect(() => {
+    // single read for user's profile
+    import("firebase/firestore").then(async ({ doc, getDoc }) => {
+      const ref = doc(db, "users", currentUser.uid);
+      const snap = await getDoc(ref);
+      setWeeklyBudget(snap.exists() ? snap.data().weeklyBudget ?? null : null);
+    });
+  }, [currentUser]);
+
+  const diff = weeklyBudget != null ? weeklyBudget - plannedTotal : null;
+  const status =
+    diff == null ? "—"
+    : diff >= 0 ? `Under budget by $${diff.toFixed(2)}`
+    : `Over budget by $${Math.abs(diff).toFixed(2)}`;
+
+  return (
+    <Card className="mt-6">
+      <CardHeader title="This week’s plan" subtitle="Budget summary" />
+      <CardBody>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <div className="text-sm text-neutral-600 dark:text-neutral-400">Weekly budget</div>
+            <div className="text-2xl font-semibold">
+              {weeklyBudget != null ? `$${weeklyBudget.toFixed(2)}` : "—"}
+            </div>
+          </div>
+          <div>
+            <div className="text-sm text-neutral-600 dark:text-neutral-400">Planned total</div>
+            <div className="text-2xl font-semibold">${plannedTotal.toFixed(2)}</div>
+          </div>
+          <div>
+            <div className="text-sm text-neutral-600 dark:text-neutral-400">Status</div>
+            <div className={`text-2xl font-semibold ${diff != null && diff < 0 ? "text-red-600" : "text-green-600"}`}>
+              {status}
+            </div>
+          </div>
+        </div>
+      </CardBody>
+    </Card>
+  );
+}
