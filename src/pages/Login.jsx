@@ -7,7 +7,7 @@ import Button from "../components/ui/Button";
 
 export default function Login() {
   const { login } = useAuth();
-  const navigate = useNavigate();            // ✅ inside component
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ export default function Login() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate("/", { replace: true });     // ✅ redirect after success
+      navigate("/", { replace: true });
     } catch (err) {
       console.error(err);
       setError(err?.message || "Sign in failed.");

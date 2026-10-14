@@ -5,10 +5,11 @@ import RecipeForm from "./components/RecipeForm";
 import RecipeList from "./components/RecipeList";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Profile from "./pages/Profile";          // ✅ new
-import BudgetSummary from "./components/BudgetSummary";  // ✅ new
+import Profile from "./pages/Profile";
+import BudgetSummary from "./components/BudgetSummary";
 import { useAuth } from "./context/AuthContext";
 import GuestRoute from "./context/GuestRoute";
+import ProtectedRoute from "./context/ProtectedRoute";
 
 function Hero() {
   return (
@@ -37,7 +38,7 @@ export default function App() {
                 <div className="space-y-6 pb-10">
                   <RecipeForm />
                   <RecipeList />
-                  <BudgetSummary />   {/* ✅ show summary */}
+                  <BudgetSummary />
                 </div>
               ) : (
                 <div className="max-w-2xl py-12 text-neutral-700 dark:text-neutral-300">
@@ -48,7 +49,9 @@ export default function App() {
           />
           <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
           <Route path="/signup" element={<GuestRoute><Signup /></GuestRoute>} />
-          <Route path="/profile" element={currentUser ? <Profile /> : <GuestRoute><Login /></GuestRoute>} /> {/* ✅ */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Routes>
       </Container>
     </div>

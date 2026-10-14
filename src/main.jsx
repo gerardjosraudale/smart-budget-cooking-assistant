@@ -4,14 +4,14 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './styles/index.css'
 import { AuthProvider } from './context/AuthContext.jsx'
-import { Toaster } from 'react-hot-toast'     // ✅ add
+import { Toaster } from 'react-hot-toast'
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <App />
-        <Toaster position="top-right" />     {/* ✅ add */}
+        <Toaster position="top-right" />
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

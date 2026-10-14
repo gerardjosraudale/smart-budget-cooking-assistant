@@ -85,7 +85,7 @@ export default function RecipeList() {
                   </ol>
                 )}
 
-                {/* ✅ Plan toggle */}
+                {/* Plan toggle */}
                 <div className="mt-2 flex items-center gap-3 text-sm">
                   <button
                     className={`px-3 h-8 rounded-xl ${

@@ -29,12 +29,8 @@ Built with **React + Vite + Firebase + Tailwind CSS**, deployed on **Vercel**.
 ---
 
 ## 🚀 Live Demo
-👉 [Smart Budget Cooking Assistant on Vercel](https://smart-budget-cooking-assistant.vercel.app)  
-*(replace with your actual production URL)*
 
----
-
-
+👉 **[smart-budget-cooking-assistant.vercel.app](https://smart-budget-cooking-assistant.vercel.app)**
 
 ---
 
@@ -44,43 +40,61 @@ Built with **React + Vite + Firebase + Tailwind CSS**, deployed on **Vercel**.
    ```bash
    git clone https://github.com/gerardjosraudale/smart-budget-cooking-assistant.git
    cd smart-budget-cooking-assistant
+   ```
 
-2. **Install dependencies
-npm install
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-3. Add environment variables
-Create a .env.local file in the root:
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-These values are available in Firebase Console → Project Settings → SDK setup & configuration.
+3. **Add environment variables** — create a `.env.local` file in the project root:
+   ```env
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+   VITE_FIREBASE_SENDER_ID=your_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   ```
+   These values are in **Firebase Console → Project Settings → Your apps → SDK setup and configuration**.
 
-4. Run locally
-npm run dev
-Open http://localhost:5173.
+4. **Run locally**
+   ```bash
+   npm run dev
+   ```
+   Open http://localhost:5173.
 
-5. Build for production
-npm run build
-npm run preview
+5. **Lint and build for production**
+   ```bash
+   npm run lint
+   npm run build
+   npm run preview
+   ```
 
-📦 Deployment (Vercel)
-Framework preset: Vite
-Build command: npm run build
-Output directory: dist
-Environment variables: add all VITE_FIREBASE_* keys in Vercel → Settings → Environment Variables
-Add your Vercel domain to Firebase → Authentication → Authorized domains
-📚 Roadmap
- Profile setup (budget, dietary restrictions, cuisines)
- Shopping list generator
- Weekly budget summary card
- Group/Shared lists
- Offline support
-👤 Author
-Josue Raudales
-LinkedIn · GitHub
-📝 License
+---
+
+## 📦 Deployment (Vercel)
+
+- **Framework preset:** Vite
+- **Build command:** `npm run build`
+- **Output directory:** `dist`
+- **Environment variables:** add all `VITE_FIREBASE_*` keys in Vercel → Settings → Environment Variables, then redeploy (Vite bakes them in at build time)
+- **Firebase:** add your Vercel domain to Authentication → Settings → Authorized domains
+
+---
+
+## 📚 Roadmap
+
+- [ ] Shopping list generator
+- [ ] Group / shared lists
+- [ ] Offline support
+
+---
+
+## 👤 Author
+
+**Josue Raudales** · [GitHub](https://github.com/gerardjosraudale)
+
+## 📝 License
 
 This project is open source and available under the MIT License.

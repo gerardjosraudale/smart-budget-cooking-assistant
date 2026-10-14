@@ -7,7 +7,7 @@ import Button from "../components/ui/Button";
 
 export default function Signup() {
   const { signup } = useAuth();
-  const navigate = useNavigate();            // ✅ inside component
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ export default function Signup() {
     setLoading(true);
     try {
       await signup(email, password);
-      navigate("/", { replace: true });     // ✅ redirect after success
+      navigate("/", { replace: true });
     } catch (err) {
       console.error(err);
       setError(err?.message || "Sign up failed.");

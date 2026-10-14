@@ -34,7 +34,7 @@ export default function RecipeForm() {
         steps: stepsArr,
         time,
         cost: cost ? Number(cost) : null,
-        planned: false,                  // ✅ new
+        planned: false,
         createdAt: serverTimestamp(),
       });
       setTitle("");
@@ -42,7 +42,7 @@ export default function RecipeForm() {
       setSteps("");
       setTime("");
       setCost("");
-      toast.success("Recipe added");     // ✅ feedback
+      toast.success("Recipe added");
     } finally {
       setSaving(false);
     }
