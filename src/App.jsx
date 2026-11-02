@@ -6,6 +6,7 @@ import RecipeList from "./components/RecipeList";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import ForgotPassword from "./pages/ForgotPassword";
 import BudgetSummary from "./components/BudgetSummary";
 import { useAuth } from "./context/AuthContext";
 import GuestRoute from "./context/GuestRoute";
@@ -49,6 +50,7 @@ export default function App() {
           />
           <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
           <Route path="/signup" element={<GuestRoute><Signup /></GuestRoute>} />
+          <Route path="/forgot-password" element={<GuestRoute><ForgotPassword /></GuestRoute>} />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
