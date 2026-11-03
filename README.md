@@ -10,12 +10,13 @@ Built with **React + Vite + Firebase + Tailwind CSS**, deployed on **Vercel**.
 
 ## ✨ Features
 
-- 🔐 **User Authentication** — secure signup/login with Firebase Auth (Email/Password).
-- 🍲 **Recipe Manager** — add, view, and delete recipes.
-- 🛒 **Budget Tracking** — recipes include estimated costs, total shown in dashboard.
-- 📋 **Ingredients & Steps** — structured input with simple chips and instructions.
-- 🎨 **Apple-inspired UI** — clean, responsive design with Tailwind CSS.
-- ☁️ **Deployed on Vercel** — continuous deployment from GitHub.
+- 🗓️ **Weekly dinner planner**: a Monday–Sunday board; pick a dinner for each day, swap or remove it, and browse past and future weeks.
+- 💰 **Budget tracking**: set a weekly budget and watch a live bar show what's planned, what's left, and when you go over.
+- ✨ **Auto-fill my week**: fills empty days with varied dinners that fit the remaining budget (keeps the days you already chose).
+- 📚 **Starter recipe library**: 24 budget dinners with ingredients, steps, servings and estimated costs, so new users can plan right away.
+- 🍲 **Your own recipes**: add family favorites with servings and total cost; cost per serving is calculated for you.
+- 🔐 **Authentication**: email/password sign-up, login and password reset with Firebase Auth.
+- 🛡️ **Firestore security rules**: users can only read and write their own profile, recipes and plans ([`firestore.rules`](firestore.rules)).
 
 ---
 
@@ -80,12 +81,14 @@ Built with **React + Vite + Firebase + Tailwind CSS**, deployed on **Vercel**.
 - **Output directory:** `dist`
 - **Environment variables:** add all `VITE_FIREBASE_*` keys in Vercel → Settings → Environment Variables, then redeploy (Vite bakes them in at build time)
 - **Firebase:** add your Vercel domain to Authentication → Settings → Authorized domains
+- **Firestore rules:** paste [`firestore.rules`](firestore.rules) into Firestore Database → Rules and publish
 
 ---
 
 ## 📚 Roadmap
 
-- [ ] Shopping list generator
+- [ ] Shopping list generator (combine ingredients from the week's plan)
+- [ ] Pantry + AI meal suggestions (serverless API)
 - [ ] Group / shared lists
 - [ ] Offline support
 
