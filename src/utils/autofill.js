@@ -81,5 +81,6 @@ export function toMeal(recipe) {
     cost: typeof recipe.cost === "number" ? recipe.cost : 0,
     servings: recipe.servings || null,
     time: recipe.time || "",
+    ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [],
   };
 }

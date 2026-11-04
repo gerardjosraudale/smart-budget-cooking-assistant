@@ -10,6 +10,7 @@ const emptyDays = () => Object.fromEntries(DAYS.map((d) => [d.key, null]));
 export function useWeekPlan(weekStart) {
   const { currentUser } = useAuth();
   const [days, setDays] = useState(emptyDays);
+  const [checked, setChecked] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,7 +23,9 @@ export function useWeekPlan(weekStart) {
     return onSnapshot(
       doc(db, "plans", `${currentUser.uid}_${weekStart}`),
       (snap) => {
-        setDays({ ...emptyDays(), ...(snap.exists() ? snap.data().days : {}) });
+        const data = snap.exists() ? snap.data() : {};
+        setDays({ ...emptyDays(), ...(data.days || {}) });
+        setChecked(data.checked || {});
         setLoading(false);
       },
       (err) => {
@@ -39,11 +42,31 @@ export function useWeekPlan(weekStart) {
       uid: currentUser.uid,
       weekStart,
       days: nextDays,
+      checked, // keep shopping-list check-offs when the plan changes
       updatedAt: serverTimestamp(),
     });
   };
 
+  // Shopping-list check-offs live on the same weekly document.
+  const saveChecked = (nextChecked) => {
+    setChecked(nextChecked);
+    return setDoc(planRef, {
+      uid: currentUser.uid,
+      weekStart,
+      days,
+      checked: nextChecked,
+      updatedAt: serverTimestamp(),
+    });
+  };
+
+  const toggleChecked = (key) => {
+    const next = { ...checked };
+    if (next[key]) delete next[key];
+    else next[key] = true;
+    return saveChecked(next);
+  };
+
   const setDay = (dayKey, meal) => saveDays({ ...days, [dayKey]: meal });
 
-  return { days, loading, error, saveDays, setDay };
+  return { days, checked, loading, error, saveDays, setDay, toggleChecked, saveChecked };
 }

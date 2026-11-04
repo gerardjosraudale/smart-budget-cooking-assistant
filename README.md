@@ -13,6 +13,7 @@ Built with **React + Vite + Firebase + Tailwind CSS**, deployed on **Vercel**.
 - 🗓️ **Weekly dinner planner**: a Monday–Sunday board; pick a dinner for each day, swap or remove it, and browse past and future weeks.
 - 💰 **Budget tracking**: set a weekly budget and watch a live bar show what's planned, what's left, and when you go over.
 - ✨ **Auto-fill my week**: fills empty days with varied dinners that fit the remaining budget (keeps the days you already chose).
+- 🛒 **Shopping list**: combines the ingredients from the week's dinners into one checklist grouped by store section, shows which meals need each item, saves check-offs per week, and copies to text.
 - 📚 **Starter recipe library**: 24 budget dinners with ingredients, steps, servings and estimated costs, so new users can plan right away.
 - 🍲 **Your own recipes**: add family favorites with servings and total cost; cost per serving is calculated for you.
 - 🔐 **Authentication**: email/password sign-up, login and password reset with Firebase Auth.
@@ -87,7 +88,7 @@ Built with **React + Vite + Firebase + Tailwind CSS**, deployed on **Vercel**.
 
 ## 📚 Roadmap
 
-- [ ] Shopping list generator (combine ingredients from the week's plan)
+- [ ] Ingredient quantities on the shopping list
 - [ ] Pantry + AI meal suggestions (serverless API)
 - [ ] Group / shared lists
 - [ ] Offline support

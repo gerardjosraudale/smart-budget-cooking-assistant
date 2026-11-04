@@ -4,6 +4,7 @@ import { Card, CardBody } from "../ui/Card";
 import Button from "../ui/Button";
 import BudgetBar from "./BudgetBar";
 import RecipePicker from "./RecipePicker";
+import ShoppingList from "./ShoppingList";
 import { STARTER_RECIPES } from "../../data/starterRecipes";
 import { useUserRecipes } from "../../hooks/useUserRecipes";
 import { useWeeklyBudget } from "../../hooks/useWeeklyBudget";
@@ -17,13 +18,17 @@ export default function WeekPlanner() {
   const [pickingDay, setPickingDay] = useState(null);
   const { recipes: userRecipes } = useUserRecipes();
   const { budget, saveBudget } = useWeeklyBudget();
-  const { days, loading, error, saveDays, setDay } = useWeekPlan(weekStart);
+  const { days, checked, loading, error, saveDays, setDay, toggleChecked, saveChecked } = useWeekPlan(weekStart);
 
   const thisWeek = weekStartOf();
   const today = toISODate(new Date());
   const planned = useMemo(
     () => Object.values(days).reduce((s, m) => s + (m?.cost || 0), 0),
     [days]
+  );
+  const recipesById = useMemo(
+    () => new Map([...STARTER_RECIPES, ...userRecipes].map((r) => [r.id, r])),
+    [userRecipes]
   );
   const filledCount = Object.values(days).filter(Boolean).length;
 
@@ -173,6 +178,16 @@ export default function WeekPlanner() {
           );
         })}
       </ul>
+
+      {!loading && (
+        <ShoppingList
+          days={days}
+          recipesById={recipesById}
+          checked={checked}
+          onToggle={(key) => run(() => toggleChecked(key))}
+          onClearChecked={() => run(() => saveChecked({}))}
+        />
+      )}
 
       {pickingDay && (
         <RecipePicker
