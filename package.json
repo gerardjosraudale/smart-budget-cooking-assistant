@@ -2,16 +2,19 @@
   "name": "smart-budget-cooking-assistant",
   "version": "1.0.0",
   "private": true,
-  "description": "Smart Budget Cooking Assistant — React + Vite + Firebase",
+  "description": "Smart Budget Cooking Assistant \u2014 React + Vite + Firebase",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node --test api/_lib/*.test.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.5.0",
     "clsx": "^2.1.1",
     "firebase": "^10.12.0",
+    "firebase-admin": "^14.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",

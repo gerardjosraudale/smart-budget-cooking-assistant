@@ -7,6 +7,7 @@ module.exports = {
   plugins: ['react-refresh'],
   overrides: [
     { files: ['*.config.js', '.eslintrc.cjs'], env: { node: true } },
+    { files: ['api/**/*.mjs'], env: { node: true, browser: false } },
   ],
   rules: {
     // JSX usage isn't tracked without eslint-plugin-react, so ignore capitalized names (components)

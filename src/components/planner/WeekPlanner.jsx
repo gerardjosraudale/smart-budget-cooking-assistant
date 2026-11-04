@@ -5,9 +5,10 @@ import Button from "../ui/Button";
 import BudgetBar from "./BudgetBar";
 import RecipePicker from "./RecipePicker";
 import ShoppingList from "./ShoppingList";
+import SmartSuggestions from "./SmartSuggestions";
 import { STARTER_RECIPES } from "../../data/starterRecipes";
 import { useUserRecipes } from "../../hooks/useUserRecipes";
-import { useWeeklyBudget } from "../../hooks/useWeeklyBudget";
+import { useProfile } from "../../hooks/useProfile";
 import { useWeekPlan } from "../../hooks/useWeekPlan";
 import { autoFillWeek, toMeal } from "../../utils/autofill";
 import { DAYS, addWeeks, dayDate, formatWeekRange, toISODate, weekStartOf } from "../../utils/week";
@@ -17,7 +18,7 @@ export default function WeekPlanner() {
   const [weekStart, setWeekStart] = useState(() => weekStartOf());
   const [pickingDay, setPickingDay] = useState(null);
   const { recipes: userRecipes } = useUserRecipes();
-  const { budget, saveBudget } = useWeeklyBudget();
+  const { budget, pantry, dietary, saveBudget, savePantry } = useProfile();
   const { days, checked, loading, error, saveDays, setDay, toggleChecked, saveChecked } = useWeekPlan(weekStart);
 
   const thisWeek = weekStartOf();
@@ -178,6 +179,17 @@ export default function WeekPlanner() {
           );
         })}
       </ul>
+
+      {!loading && (
+        <SmartSuggestions
+          days={days}
+          budgetLeft={budget != null ? Math.max(0, Math.round((budget - planned) * 100) / 100) : null}
+          pantry={pantry}
+          dietary={dietary}
+          onSavePantry={savePantry}
+          onPlan={(dayKey, recipe) => setDay(dayKey, toMeal(recipe))}
+        />
+      )}
 
       {!loading && (
         <ShoppingList
