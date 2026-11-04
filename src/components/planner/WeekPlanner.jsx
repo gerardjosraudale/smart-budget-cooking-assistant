@@ -48,6 +48,11 @@ export default function WeekPlanner() {
   };
 
   const autoFill = () => {
+    if (budget == null) {
+      toast.error("Set your weekly budget first so auto-fill can stay within it.");
+      document.getElementById("weekly-budget")?.focus();
+      return;
+    }
     const pool = [...STARTER_RECIPES, ...userRecipes];
     const { days: next, filled, overBudget } = autoFillWeek(days, pool, budget);
     if (filled === 0) {

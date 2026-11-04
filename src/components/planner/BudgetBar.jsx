@@ -43,7 +43,7 @@ export default function BudgetBar({ budget, planned, onSaveBudget }) {
             inputMode="decimal"
             min="1"
             step="0.01"
-            placeholder="60"
+            placeholder="e.g. 60"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             className="w-40"
@@ -58,7 +58,7 @@ export default function BudgetBar({ budget, planned, onSaveBudget }) {
         )}
         {budget == null && (
           <p className="w-full text-sm text-neutral-600 dark:text-neutral-400">
-            Set a budget to see how your week adds up. Planned so far: {formatMoney(planned)}
+            Set your budget first. Auto-fill uses it to pick dinners that fit. Planned so far: {formatMoney(planned)}
           </p>
         )}
       </form>
