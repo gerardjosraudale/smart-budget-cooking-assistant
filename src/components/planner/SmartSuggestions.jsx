@@ -59,8 +59,14 @@ export default function SmartSuggestions({ days, budgetLeft, pantry, dietary, on
         }),
       });
       const data = await res.json().catch(() => null);
-      if (!data) throw new Error("Suggestions need the server. Locally, run the app with `vercel dev`.");
-      if (!res.ok) throw new Error(data.error || "Couldn't get suggestions.");
+      if (!data) {
+        throw new Error(
+          res.status === 404
+            ? "Suggestions need the server. Locally, run the app with `vercel dev`."
+            : `The suggestion server had a problem (error ${res.status}). Please try again.`
+        );
+      }
+      if (!res.ok) throw new Error([data.error, data.detail].filter(Boolean).join(" ") || "Couldn't get suggestions.");
       setSuggestions(data.suggestions);
       setRemaining(data.remaining);
     } catch (err) {
